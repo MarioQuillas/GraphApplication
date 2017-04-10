@@ -3,34 +3,32 @@ using System.Linq;
 
 namespace CurrencyGraph.Domain
 {
-    public class ShortestPathFinder
+    internal class ShortestPathFinder<TVertex>
     {
-        private readonly Currency sourceVertex;
-        private readonly HashSet<Currency> markedVertices;
-        private readonly Dictionary<Currency, Currency> vertexToParentVertex;
+        private readonly IScannedGraphResult<TVertex> scannedGraphResult;
 
-        public ShortestPathFinder(Currency sourceVertex, HashSet<Currency> markedVertices, Dictionary<Currency, Currency> vertexToParentVertex)
+        internal ShortestPathFinder(IScannedGraphResult<TVertex> scannedGraphResult)
         {
-            this.sourceVertex = sourceVertex;
-            this.markedVertices = markedVertices;
-            this.vertexToParentVertex = vertexToParentVertex;
+            this.scannedGraphResult = scannedGraphResult;
         }
 
-        public bool IsConnected(Currency targetVertex) => this.markedVertices.Contains(targetVertex);
+        public bool IsConnected(TVertex targetVertex) => this.scannedGraphResult.MarkedVertices.Contains(targetVertex);
 
-        public IEnumerable<Currency> Path(Currency targetVertex)
+        public IEnumerable<TVertex> Path(TVertex targetVertex)
         {
-            if (!this.IsConnected(targetVertex)) return Enumerable.Empty<Currency>();
+            if (!this.IsConnected(targetVertex)) return Enumerable.Empty<TVertex>();
 
-            var path = new Stack<Currency>();
+            var path = new Stack<TVertex>();
 
             var currentVertexInPath = targetVertex;
-            while (currentVertexInPath != this.sourceVertex)
+
+            //TODO : implement correct equality
+            while (!currentVertexInPath.Equals(this.scannedGraphResult.SourceVertex))
             {
                 path.Push(currentVertexInPath);
-                currentVertexInPath = this.vertexToParentVertex[currentVertexInPath];
+                currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
             }
-            path.Push(this.sourceVertex);
+            path.Push(this.scannedGraphResult.SourceVertex);
 
             return path;
         }

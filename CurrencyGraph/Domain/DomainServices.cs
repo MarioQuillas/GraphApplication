@@ -19,13 +19,11 @@ namespace CurrencyGraph.Domain
             return 0;
         }
 
-        public IEnumerable<Currency> CalculateConversionPath(Currency source, Currency target, List<ChangeRate> rates)
+        public IEnumerable<Currency> CalculateConversionPath(Currency source, Currency target, IEnumerable<ChangeRate> rates)
         {
             var graph = new CurrencyGraph(rates);
 
-            var pathFinder = graph.Accept(new BfsVisitor(source));
-
-            return pathFinder.Path(target);
+            return graph.GetShortestPath(source, target);
         }
     }
 }

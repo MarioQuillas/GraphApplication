@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B2663E74-B877-4B68-B8D6-B537B0AC0133}</ProjectGuid>
+    <ProjectGuid>{176B6450-CA49-421A-9691-13B71AFEE413}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CurrencyGraph.Tests</RootNamespace>
@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CurrencyGraph\CurrencyGraph.csproj">
-      <Project>{1f6a3528-a6a1-4146-bd0d-a56f81b7d135}</Project>
+      <Project>{374b7a96-d546-492d-9585-b18cc289bb54}</Project>
       <Name>CurrencyGraph</Name>
     </ProjectReference>
   </ItemGroup>

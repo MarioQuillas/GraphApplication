@@ -2,14 +2,15 @@
 
 namespace CurrencyGraph.Domain
 {
-    public class CurrencyGraph : IStatelessAceptor<CurrencyGraph>
+    internal class CurrencyGraph : IGraph<Currency>
     {
         private readonly Dictionary<Currency, ICollection<Currency>> adjacency;
+        private readonly IScannerGraphAlgorithm<Currency> scannerGraphAlgorithm;
 
         public int TotalVertices { get; private set; }
         public int TotalEdges { get; private set;  }
 
-        public CurrencyGraph(IEnumerable<ChangeRate> changeRates)
+        internal CurrencyGraph(IEnumerable<ChangeRate> changeRates)
         {
             this.adjacency = new Dictionary<Currency, ICollection<Currency>>();
             this.TotalEdges = 0;
@@ -19,6 +20,8 @@ namespace CurrencyGraph.Domain
             {
                 this.AddEdge(rate.Source, rate.Target);
             }
+
+            this.scannerGraphAlgorithm = new BfsScanner<Currency>(new TraverserResultfactory<Currency>());
         }
 
         private void AddEdge(Currency currency1, Currency currency2)
@@ -41,14 +44,15 @@ namespace CurrencyGraph.Domain
             this.TotalEdges += 1;
         }
 
-        public IEnumerable<Currency> AdjacentToVertex(Currency vertex)
+        public IEnumerable<Currency> GetAdjacentsToVertex(Currency vertex)
         {
             return this.adjacency[vertex];
         }
 
-        public TResult Accept<TResult>(IStatelessVisitor<CurrencyGraph, TResult> statelessVisitor)
+        internal IEnumerable<Currency> GetShortestPath(Currency source, Currency target)
         {
-            return statelessVisitor.Visit(this);
+            var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
+            return new ShortestPathFinder<Currency>(scannedGraphResult).Path(target);
         }
     }
 }
