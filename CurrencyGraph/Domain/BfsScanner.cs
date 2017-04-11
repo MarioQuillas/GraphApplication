@@ -4,16 +4,21 @@ using System.Runtime.CompilerServices;
 
 namespace CurrencyGraph.Domain
 {
-    internal class BfsScanner<TVertex> : IScannerGraphAlgorithm<TVertex>
+    internal class BfsScanner<TVertex, TEdge> : IScannerGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
-        private readonly ITraverserResultfactory<TVertex> traverserResultfactory;
+        private readonly IScannerResultfactory<TVertex> scannerResultfactory;
 
-        internal BfsScanner(ITraverserResultfactory<TVertex> traverserResultfactory)
+        internal BfsScanner(IScannerResultfactory<TVertex> scannerResultfactory)
         {
-            this.traverserResultfactory = traverserResultfactory;
+            this.scannerResultfactory = scannerResultfactory;
         }
 
-        public IScannedGraphResult<TVertex> TraverseGraph(IGraph<TVertex> graph, TVertex sourceVertex)
+        //public IScannedGraphResult<TVertex> TraverseGraph(IUndirectedGraph<TVertex, TEdge> undirectedGraph, TVertex sourceVertex)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+
+        public IScannedGraphResult<TVertex> TraverseGraph(IUndirectedGraph<TVertex, TEdge> undirectedGraph, TVertex sourceVertex)
         {
             var markedVertices = new HashSet<TVertex>();
             var vertexToParentVertex = new Dictionary<TVertex, TVertex>();
@@ -26,8 +31,10 @@ namespace CurrencyGraph.Domain
             while (queue.Any())
             {
                 var currentVertex = queue.Dequeue();
-                foreach (var vertex in graph.GetAdjacentsToVertex(currentVertex))
+                foreach (var edge in undirectedGraph.GetAdjacentsToVertex(currentVertex))
                 {
+                    var vertex = edge.GetOtherVertex(currentVertex);
+
                     if (!markedVertices.Add(vertex)) continue;
 
                     vertexToParentVertex[vertex] = currentVertex;
@@ -35,7 +42,7 @@ namespace CurrencyGraph.Domain
                 }
             }
 
-            return this.traverserResultfactory.CreateResult(sourceVertex, markedVertices, vertexToParentVertex);
+            return this.scannerResultfactory.CreateResult(sourceVertex, markedVertices, vertexToParentVertex);
         }
     }
 }

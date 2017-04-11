@@ -1,50 +1,57 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CurrencyGraph.Domain
 {
-    internal class CurrencyGraph : IGraph<Currency>
+    internal class CurrencyGraph : IUndirectedGraph<Currency, WeightedBidrectionalEdge<Currency>>
     {
-        private readonly Dictionary<Currency, ICollection<Currency>> adjacency;
-        private readonly IScannerGraphAlgorithm<Currency> scannerGraphAlgorithm;
+        private readonly Dictionary<Currency, ICollection<WeightedBidrectionalEdge<Currency>>> adjacency;
+        private readonly IScannerGraphAlgorithm<Currency, WeightedBidrectionalEdge<Currency>> scannerGraphAlgorithm;
 
         public int TotalVertices { get; private set; }
         public int TotalEdges { get; private set;  }
 
-        internal CurrencyGraph(IEnumerable<ChangeRate> changeRates)
+        internal CurrencyGraph(IEnumerable<ChangeRate> changeRates, IChangeRateComputationStrategy changeRateComputationStrategy)
         {
-            this.adjacency = new Dictionary<Currency, ICollection<Currency>>();
+            this.adjacency = new Dictionary<Currency, ICollection<WeightedBidrectionalEdge<Currency>>>();
             this.TotalEdges = 0;
             this.TotalVertices = 0;
 
-            foreach (var rate in changeRates)
+            foreach (var changeRate in changeRates)
             {
-                this.AddEdge(rate.Source, rate.Target);
+                this.AddEdge(changeRate, changeRateComputationStrategy);
             }
 
-            this.scannerGraphAlgorithm = new BfsScanner<Currency>(new TraverserResultfactory<Currency>());
+            this.scannerGraphAlgorithm = new BfsScanner<Currency, WeightedBidrectionalEdge<Currency>>(new ScannerResultfactory<Currency>());
         }
 
-        private void AddEdge(Currency currency1, Currency currency2)
+        private void AddEdge(ChangeRate changeRate, IChangeRateComputationStrategy changeRateComputationStrategy)
         {
-            if (!this.adjacency.ContainsKey(currency1))
+            var source = changeRate.Source;
+            var target = changeRate.Target;
+
+            if (!this.adjacency.ContainsKey(source))
             {
-                this.adjacency[currency1] = new List<Currency>();
+                this.adjacency[source] = new List<WeightedBidrectionalEdge<Currency>>();
                 this.TotalVertices += 1;
             }
 
-            if (!this.adjacency.ContainsKey(currency2))
+            if (!this.adjacency.ContainsKey(target))
             {
-                this.adjacency[currency2] = new List<Currency>();
+                this.adjacency[target] = new List<WeightedBidrectionalEdge<Currency>>();
                 this.TotalVertices += 1;
             }
 
-            this.adjacency[currency1].Add(currency2);
-            this.adjacency[currency2].Add(currency1);
+            var originalRate = changeRate.Rate;
+            var inverseRate = changeRateComputationStrategy.Inverse(originalRate);
+
+            this.adjacency[source].Add(new WeightedBidrectionalEdge<Currency>(source, target, originalRate, inverseRate));
+            this.adjacency[target].Add(new WeightedBidrectionalEdge<Currency>(target, source, inverseRate, originalRate));
 
             this.TotalEdges += 1;
         }
 
-        public IEnumerable<Currency> GetAdjacentsToVertex(Currency vertex)
+        public IEnumerable<WeightedBidrectionalEdge<Currency>> GetAdjacentsToVertex(Currency vertex)
         {
             return this.adjacency[vertex];
         }

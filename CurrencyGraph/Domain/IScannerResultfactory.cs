@@ -2,7 +2,7 @@
 
 namespace CurrencyGraph.Domain
 {
-    internal interface ITraverserResultfactory<TVertex>
+    internal interface IScannerResultfactory<TVertex>
     {
         IScannedGraphResult<TVertex> CreateResult
             (TVertex sourceVertex, HashSet<TVertex> markedVertices, Dictionary<TVertex, TVertex> vertexToParentVertex);

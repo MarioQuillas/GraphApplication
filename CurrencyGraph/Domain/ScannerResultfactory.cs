@@ -2,7 +2,7 @@
 
 namespace CurrencyGraph.Domain
 {
-    class TraverserResultfactory<TVertex> : ITraverserResultfactory<TVertex>
+    class ScannerResultfactory<TVertex> : IScannerResultfactory<TVertex>
     {
         public IScannedGraphResult<TVertex> CreateResult(TVertex sourceVertex, HashSet<TVertex> markedVertices,
             Dictionary<TVertex, TVertex> vertexToParentVertex)
