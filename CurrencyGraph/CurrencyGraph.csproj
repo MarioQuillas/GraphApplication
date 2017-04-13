@@ -48,6 +48,8 @@
     <Compile Include="Domain\ChangeRate.cs" />
     <Compile Include="Domain\Currency.cs" />
     <Compile Include="Domain\CurrencyGraph.cs" />
+    <Compile Include="Domain\SimplePath.cs" />
+    <Compile Include="Domain\PathStep.cs" />
     <Compile Include="Domain\VertexEdge.cs" />
     <Compile Include="Domain\WeightedDirectionalEdge.cs" />
     <Compile Include="Domain\DomainServices.cs" />

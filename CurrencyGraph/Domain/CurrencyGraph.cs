@@ -22,7 +22,7 @@ namespace CurrencyGraph.Domain
                 this.AddEdge(changeRate, changeRateComputationStrategy);
             }
 
-            this.scannerGraphAlgorithm = new BfsScanner<Currency, WeightedBidrectionalEdge<Currency>>(new ScannerResultfactory<Currency>());
+            this.scannerGraphAlgorithm = new BfsScanner<Currency, WeightedBidrectionalEdge<Currency>>(new ScannerResultfactory<Currency, WeightedBidrectionalEdge<Currency>>());
         }
 
         private void AddEdge(ChangeRate changeRate, IChangeRateComputationStrategy changeRateComputationStrategy)
@@ -56,10 +56,10 @@ namespace CurrencyGraph.Domain
             return this.adjacency[vertex];
         }
 
-        internal IEnumerable<Currency> GetShortestPath(Currency source, Currency target)
-        {
-            var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
-            return new ShortestPathFinder<Currency>(scannedGraphResult).Path(target);
-        }
+        //internal IEnumerable<Currency> GetShortestPath(Currency source, Currency target)
+        //{
+        //    var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
+        //    return new ShortestPathFinder<Currency>(scannedGraphResult).Path(target);
+        //}
     }
 }

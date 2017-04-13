@@ -14,22 +14,27 @@ namespace CurrencyGraph.Domain
 
         public bool IsConnected(TVertex targetVertex) => this.scannedGraphResult.MarkedVertices.Contains(targetVertex);
 
-        public IEnumerable<VertexEdge<TVertex, TEdge>> Path(TVertex targetVertex)
+        public SimplePath<TVertex, TEdge> Path(TVertex targetVertex)
         {
-            if (!this.IsConnected(targetVertex)) return Enumerable.Empty<VertexEdge<TVertex, TEdge>>();
+            var startingVertex = this.scannedGraphResult.SourceVertex;
 
-            var path = new Stack<VertexEdge<TVertex, TEdge>>();
+            var path = SimplePath<TVertex, TEdge>.Empty(startingVertex);
+
+            if (!this.IsConnected(targetVertex)) return path;
+            
+            //var path = new Stack<VertexEdge<TVertex, TEdge>>();
 
             var currentVertexInPath = targetVertex;
 
             //TODO : implement correct equality
-            while (!currentVertexInPath.Equals(this.scannedGraphResult.SourceVertex))
+            while (!currentVertexInPath.Equals(startingVertex))
             {
-                var edge = this.scannedGraphResult.GetVertexToParentVertexEdge(currentVertexInPath);
-                path.Push(new VertexEdge<TVertex, TEdge>(currentVertexInPath, edge));
-                currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
+                var edge = this.scannedGraphResult.VertexToParentEdge[currentVertexInPath];
+                path.AddNextContinuousEdge(edge);
+                currentVertexInPath = edge.GetOtherVertex(currentVertexInPath);
+                //currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
             }
-            path.Push(this.scannedGraphResult.SourceVertex);
+            //path.Push(this.scannedGraphResult.SourceVertex);
 
             return path;
         }

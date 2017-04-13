@@ -2,9 +2,9 @@
 
 namespace CurrencyGraph.Domain
 {
-    internal interface IScannerResultfactory<TVertex>
+    internal interface IScannerResultfactory<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
-        IScannedGraphResult<TVertex> CreateResult
-            (TVertex sourceVertex, HashSet<TVertex> markedVertices, Dictionary<TVertex, TVertex> vertexToParentVertex);
+        IScannedGraphResult<TVertex, TEdge> CreateResult(TVertex sourceVertex, HashSet<TVertex> markedVertices,
+            Dictionary<TVertex, TEdge> vertexToParentEdge);
     }
 }

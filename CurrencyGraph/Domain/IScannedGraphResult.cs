@@ -7,7 +7,6 @@ namespace CurrencyGraph.Domain
     {
         HashSet<TVertex> MarkedVertices { get; }
         TVertex SourceVertex { get; }
-        Dictionary<TVertex, TVertex> VertexToParentVertex { get; }
-        TEdge GetVertexToParentVertexEdge(TVertex vertex);
+        Dictionary<TVertex, TEdge> VertexToParentEdge { get; }
     }
 }

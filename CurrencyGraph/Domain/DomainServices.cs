@@ -21,9 +21,10 @@ namespace CurrencyGraph.Domain
 
         public IEnumerable<Currency> CalculateConversionPath(Currency source, Currency target, IEnumerable<ChangeRate> rates)
         {
-            var graph = new CurrencyGraph(rates);
+            //var graph = new CurrencyGraph(rates);
 
-            return graph.GetShortestPath(source, target);
+            //return graph.GetShortestPath(source, target);
+            return null;
         }
     }
 }
