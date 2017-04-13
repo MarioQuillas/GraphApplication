@@ -2,6 +2,6 @@
 {
     internal interface IChangeRateComputationStrategy
     {
-        decimal Inverse(decimal changeRateRate);
+        decimal ComputeInverseRate(decimal changeRateRate);
     }
 }

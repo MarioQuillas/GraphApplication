@@ -1,6 +1,6 @@
 ﻿namespace CurrencyGraph.Domain
 {
-    interface IUndirectedEdge<TVertex>
+    public interface IUndirectedEdge<TVertex>
     {
         //TODO : A better design should be return a Maybe<TVertex>
         TVertex GetOtherVertex(TVertex currentVertex);

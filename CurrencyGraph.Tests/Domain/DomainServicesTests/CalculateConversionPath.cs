@@ -24,7 +24,7 @@ namespace CurrencyGraph.Tests.Domain.DomainServicesTests
                 new ChangeRate("JPY", "INR", (decimal) 0.6571),
             };
 
-            var result = new DomainServices().CalculateConversionPath(deviceSource, deviceTarget, rates);
+            var result = new DomainServices().GetConversionPath(deviceSource, deviceTarget, rates);
 
             var actualResult = new List<ChangeRate>();
         }

@@ -18,7 +18,7 @@ namespace CurrencyGraph.Domain
         {
             var startingVertex = this.scannedGraphResult.SourceVertex;
 
-            var path = SimplePath<TVertex, TEdge>.Empty(startingVertex);
+            var path = SimplePath<TVertex, TEdge>.Empty(startingVertex, targetVertex);
 
             if (!this.IsConnected(targetVertex)) return path;
             
@@ -30,7 +30,7 @@ namespace CurrencyGraph.Domain
             while (!currentVertexInPath.Equals(startingVertex))
             {
                 var edge = this.scannedGraphResult.VertexToParentEdge[currentVertexInPath];
-                path.AddNextContinuousEdge(edge);
+                path.AddNextContinuousEdgeFromCurrentEndingVertex(edge);
                 currentVertexInPath = edge.GetOtherVertex(currentVertexInPath);
                 //currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
             }

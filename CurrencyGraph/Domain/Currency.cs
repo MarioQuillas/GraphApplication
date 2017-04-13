@@ -11,6 +11,7 @@ namespace CurrencyGraph.Domain
             this.shortName = shortName;
         }
 
+        // TODO : For testing simplicity purpose
         public static implicit operator Currency(string str)
         {
             return new Currency(str);
@@ -34,6 +35,12 @@ namespace CurrencyGraph.Domain
         public override int GetHashCode()
         {
             return (shortName != null ? shortName.GetHashCode() : 0);
+        }
+
+        //TODO : for debugguing purpose
+        public override string ToString()
+        {
+            return this.shortName;
         }
     }
 }

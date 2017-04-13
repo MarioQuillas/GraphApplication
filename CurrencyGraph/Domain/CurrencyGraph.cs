@@ -43,7 +43,7 @@ namespace CurrencyGraph.Domain
             }
 
             var originalRate = changeRate.Rate;
-            var inverseRate = changeRateComputationStrategy.Inverse(originalRate);
+            var inverseRate = changeRateComputationStrategy.ComputeInverseRate(originalRate);
 
             this.adjacency[source].Add(new WeightedBidrectionalEdge<Currency>(source, target, originalRate, inverseRate));
             this.adjacency[target].Add(new WeightedBidrectionalEdge<Currency>(target, source, inverseRate, originalRate));
@@ -56,10 +56,12 @@ namespace CurrencyGraph.Domain
             return this.adjacency[vertex];
         }
 
-        //internal IEnumerable<Currency> GetShortestPath(Currency source, Currency target)
-        //{
-        //    var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
-        //    return new ShortestPathFinder<Currency>(scannedGraphResult).Path(target);
-        //}
+        internal IEnumerable<PathStep<Currency, WeightedBidrectionalEdge<Currency>>> GetShortestPath(Currency source, Currency target)
+        {
+            var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
+            var shortestPath = new ShortestPathFinder<Currency, WeightedBidrectionalEdge<Currency>>(scannedGraphResult);
+            var result = shortestPath.Path(target);
+            return result.GetPathTraveller();
+        }
     }
 }

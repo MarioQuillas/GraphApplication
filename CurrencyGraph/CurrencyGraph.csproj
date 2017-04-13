@@ -46,6 +46,7 @@
     <Compile Include="Appication\Interfaces\IDomainServices.cs" />
     <Compile Include="Domain\BfsScanner.cs" />
     <Compile Include="Domain\ChangeRate.cs" />
+    <Compile Include="Domain\ChangeRateComputationStrategy.cs" />
     <Compile Include="Domain\Currency.cs" />
     <Compile Include="Domain\CurrencyGraph.cs" />
     <Compile Include="Domain\SimplePath.cs" />
