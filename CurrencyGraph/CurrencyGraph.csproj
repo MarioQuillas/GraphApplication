@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Appication\ApplicationServices.cs" />
+    <Compile Include="Appication\ChangeRateDto.cs" />
     <Compile Include="Appication\Interfaces\IDomainServices.cs" />
     <Compile Include="Domain\BfsScanner.cs" />
     <Compile Include="Domain\ChangeRate.cs" />
@@ -64,10 +65,7 @@
     <Compile Include="Domain\ShortestPathFinder.cs" />
     <Compile Include="Domain\ScannerResultfactory.cs" />
     <Compile Include="Domain\WeightedBidrectionalEdge.cs" />
-    <Compile Include="Presentation\Interfaces\ICommand.cs" />
-    <Compile Include="Presentation\Interfaces\ICommandResult.cs" />
-    <Compile Include="Presentation\Interfaces\IUserInterface.cs" />
-    <Compile Include="Presentation\Interfaces\IView.cs" />
+    <Compile Include="IApplicationServices.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,38 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq.Expressions;
+using CurrencyGraph.Appication;
+using CurrencyGraph.Domain;
 
 namespace CurrencyGraph
 {
     class Program
     {
-        //private IApplicationServices appServices;
-
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
-            var toto = new CommandParser();
-            var titi = toto.Parse(args);
+            if (args.Length == 0 || args.Length > 1)
+            {
+                Console.WriteLine("The input parameters are not correct");
+                Console.ReadLine();
+                return;
+            }
 
-            // while()
+            var inputPath = args[0]; //@"C:\MyGitHub\GraphApplication\CurrencyGraph.Tests\testFile.in";
+
+            if (!File.Exists(inputPath))
+            {
+                Console.WriteLine("The file does not exist");
+                Console.ReadLine();
+                return;
+            }
+
             var question = "";
-            var lines = 0;
-            var data = new List<string>(lines);
+            var inputData = new List<string>();
+            using (var reader = File.OpenText(inputPath))
+            {
+                question = reader.ReadLine();
+                var canParse = int.TryParse(reader.ReadLine(), out int numberInputs);
+                if (!canParse)
+                {
+                    Console.WriteLine("The second line was not in the expected format");
+                    Console.ReadLine();
+                    return;
+                }
 
-            IApplicationServices appServices = null;
+                for (var i = 0; i < numberInputs; i++)
+                {
+                    inputData.Add(reader.ReadLine());
+                }
+            }
 
-            var result = appServices.Calculate(question, data);
-        }
-    }
+            var result = new ApplicationServices(new DomainServices()).Calculate(question, inputData);
 
-    internal interface IApplicationServices
-    {
-        object Calculate(string question, List<string> data);
-    }
-
-    internal class CommandParser
-    {
-        public object Parse(string[] args)
-        {
-            throw new NotImplementedException();
+            Console.WriteLine(result);
+            Console.ReadLine();
         }
     }
 }

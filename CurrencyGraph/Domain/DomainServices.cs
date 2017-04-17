@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CurrencyGraph.Appication;
 using CurrencyGraph.Appication.Interfaces;
 
 namespace CurrencyGraph.Domain
@@ -8,11 +9,6 @@ namespace CurrencyGraph.Domain
     public class DomainServices : IDomainServices
     {
         public const int RoundNumberDecimals = 4;
-
-        public void Calculate(string question, List<string> data)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public decimal Calculate(Currency source, Currency target,
             decimal quantity,
@@ -34,6 +30,13 @@ namespace CurrencyGraph.Domain
             var graph = new CurrencyGraph(rates, new ChangeRateComputationStrategy(RoundNumberDecimals));
 
             return graph.GetShortestPath(source, target);
+        }
+
+        public decimal Calculate(string source, string target, decimal quantity, IEnumerable<ChangeRateDto> rates)
+        {
+            return this.Calculate(source, target, quantity,
+                rates.Select(changeRateDto => new ChangeRate(changeRateDto.Source, changeRateDto.Target,
+                    changeRateDto.Rate)));
         }
     }
 }

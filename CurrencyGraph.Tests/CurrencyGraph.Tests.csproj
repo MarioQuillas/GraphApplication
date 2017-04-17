@@ -48,11 +48,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\ApplicationServicesTests\ParseTest.cs" />
     <Compile Include="Domain\DomainServicesTests\CalculateConversionPath.cs" />
     <Compile Include="Domain\DomainServicesTests\CalculateTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\testFile.in" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
