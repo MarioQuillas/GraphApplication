@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
-    class ScannerResultfactory<TVertex, TEdge> : IScannerResultfactory<TVertex, TEdge>
+    public class ScannerResultfactory<TVertex, TEdge> : IScannerResultfactory<TVertex, TEdge>
         where TEdge : IUndirectedEdge<TVertex>
     {
         public IScannedGraphResult<TVertex, TEdge> CreateResult(TVertex sourceVertex, HashSet<TVertex> markedVertices,

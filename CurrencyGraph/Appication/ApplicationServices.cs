@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using CurrencyGraph.Appication.Interfaces;
+using CurrencyGraph.Presentation;
 
 namespace CurrencyGraph.Appication
 {

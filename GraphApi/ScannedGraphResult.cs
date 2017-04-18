@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
     internal class ScannedGraphResult<TVertex, TEdge> : IScannedGraphResult<TVertex, TEdge>
         where TEdge : IUndirectedEdge<TVertex>

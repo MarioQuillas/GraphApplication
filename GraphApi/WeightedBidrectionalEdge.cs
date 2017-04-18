@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Data;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
     public class WeightedBidrectionalEdge<TVertex> : IUndirectedEdge<TVertex>
     {
         private readonly WeightedDirectionalEdge<TVertex> edge1;
         private readonly WeightedDirectionalEdge<TVertex> edge2;
 
-        internal WeightedBidrectionalEdge(TVertex vertex1, TVertex vertex2, decimal weight12, decimal weight21)
+        public WeightedBidrectionalEdge(TVertex vertex1, TVertex vertex2, decimal weight12, decimal weight21)
         {
             this.edge1 = new WeightedDirectionalEdge<TVertex>(vertex1, vertex2, weight12);
             this.edge2 = new WeightedDirectionalEdge<TVertex>(vertex2, vertex1, weight21);

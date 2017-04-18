@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
-    internal class SimplePath<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public class SimplePath<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
         public TVertex StartingVertex { get; }
         public TVertex EndingVertex { get; }

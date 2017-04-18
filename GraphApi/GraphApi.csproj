@@ -40,7 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BfsScanner.cs" />
+    <Compile Include="Interfaces\IScannedGraphResult.cs" />
+    <Compile Include="Interfaces\IScannerGraphAlgorithm.cs" />
+    <Compile Include="Interfaces\IScannerResultfactory.cs" />
+    <Compile Include="Interfaces\IUndirectedEdge.cs" />
+    <Compile Include="Interfaces\IUndirectedGraph.cs" />
+    <Compile Include="PathStep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScannedGraphResult.cs" />
+    <Compile Include="ScannerResultfactory.cs" />
+    <Compile Include="ShortestPathFinder.cs" />
+    <Compile Include="SimplePath.cs" />
+    <Compile Include="VertexEdge.cs" />
+    <Compile Include="WeightedBidrectionalEdge.cs" />
+    <Compile Include="WeightedDirectionalEdge.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

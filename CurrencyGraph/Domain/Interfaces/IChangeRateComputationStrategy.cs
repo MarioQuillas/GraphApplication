@@ -1,4 +1,4 @@
-﻿namespace CurrencyGraph.Domain
+﻿namespace CurrencyGraph.Domain.Interfaces
 {
     internal interface IChangeRateComputationStrategy
     {

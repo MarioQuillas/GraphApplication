@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using CurrencyGraph.Appication;
 
-namespace CurrencyGraph
+namespace CurrencyGraph.Presentation
 {
     internal interface IApplicationServices
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CurrencyGraph.Appication;
 using CurrencyGraph.Appication.Interfaces;
+using GraphApi;
 
 namespace CurrencyGraph.Domain
 {

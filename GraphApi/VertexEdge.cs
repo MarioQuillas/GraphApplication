@@ -1,6 +1,7 @@
 ﻿using System;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
     internal class VertexEdge<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {

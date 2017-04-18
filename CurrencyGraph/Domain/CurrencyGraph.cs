@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CurrencyGraph.Domain.Interfaces;
+using GraphApi;
+using GraphApi.Interfaces;
 
 namespace CurrencyGraph.Domain
 {

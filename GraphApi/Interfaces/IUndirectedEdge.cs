@@ -1,4 +1,4 @@
-﻿namespace CurrencyGraph.Domain
+﻿namespace GraphApi.Interfaces
 {
     public interface IUndirectedEdge<TVertex>
     {

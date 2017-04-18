@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
-    internal class ShortestPathFinder<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public class ShortestPathFinder<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
         private readonly IScannedGraphResult<TVertex, TEdge> scannedGraphResult;
 
-        internal ShortestPathFinder(IScannedGraphResult<TVertex, TEdge> scannedGraphResult)
+        public ShortestPathFinder(IScannedGraphResult<TVertex, TEdge> scannedGraphResult)
         {
             this.scannedGraphResult = scannedGraphResult;
         }

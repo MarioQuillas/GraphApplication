@@ -1,4 +1,4 @@
-﻿namespace CurrencyGraph.Domain
+﻿namespace GraphApi
 {
     internal class WeightedDirectionalEdge<TVertex>
     {

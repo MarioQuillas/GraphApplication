@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using GraphApi.Interfaces;
 
-namespace CurrencyGraph.Domain
+namespace GraphApi
 {
-    internal class BfsScanner<TVertex, TEdge> : IScannerGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    public class BfsScanner<TVertex, TEdge> : IScannerGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
         private readonly IScannerResultfactory<TVertex, TEdge> scannerResultfactory;
 
-        internal BfsScanner(IScannerResultfactory<TVertex, TEdge> scannerResultfactory)
+        public BfsScanner(IScannerResultfactory<TVertex, TEdge> scannerResultfactory)
         {
             this.scannerResultfactory = scannerResultfactory;
         }

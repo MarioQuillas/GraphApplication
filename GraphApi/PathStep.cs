@@ -1,4 +1,6 @@
-﻿namespace CurrencyGraph.Domain
+﻿using GraphApi.Interfaces;
+
+namespace GraphApi
 {
     public class PathStep<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
     {
