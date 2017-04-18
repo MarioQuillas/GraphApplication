@@ -72,5 +72,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GraphApi\GraphApi.csproj">
+      <Project>{58d2947b-9b91-4b01-8f15-b3196433ab10}</Project>
+      <Name>GraphApi</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

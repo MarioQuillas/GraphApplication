@@ -30,5 +30,40 @@ namespace CurrencyGraph.Tests.Domain.DomainServicesTests
             Assert.IsTrue(result == 59033);
         }
 
+        [TestMethod]
+        public void TestMethod2()
+        {
+            var deviceSource = new Currency("EUR");
+            var deviceTarget = new Currency("JPY");
+
+            var rates = new List<ChangeRate>()
+            {
+                new ChangeRate("EUR", "CHF", (decimal) 0.9661),
+                new ChangeRate("CHF", "JPY", (decimal) 13.1151),
+            };
+
+            var result = new DomainServices().Calculate(
+                deviceSource, deviceTarget, 1000, rates);
+
+            Assert.IsTrue(result == 12670);
+        }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            var deviceSource = new Currency("EUR");
+            var deviceTarget = new Currency("JPY");
+
+            var rates = new List<ChangeRate>()
+            {
+                new ChangeRate("EUR", "CHF", (decimal) 1),
+                new ChangeRate("CHF", "JPY", (decimal) 1.5),
+            };
+
+            var result = new DomainServices().Calculate(
+                deviceSource, deviceTarget, 1, rates);
+
+            Assert.IsTrue(result == 2);
+        }
     }
 }
