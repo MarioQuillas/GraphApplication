@@ -4,6 +4,7 @@ using GraphApi.Interfaces;
 namespace GraphApi
 {
     public class WeightedBidrectionalEdge<TVertex> : IUndirectedEdge<TVertex>
+        where TVertex:IEquatable<TVertex>
     {
         private readonly WeightedDirectionalEdge<TVertex> edge1;
         private readonly WeightedDirectionalEdge<TVertex> edge2;

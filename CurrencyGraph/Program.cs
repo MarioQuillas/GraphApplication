@@ -33,7 +33,8 @@ namespace CurrencyGraph
             {
                 question = reader.ReadLine();
                 var readLine = reader.ReadLine();
-                var canParse = readLine != null && int.TryParse(readLine.Trim(), out int numberInputs);
+                int numberInputs = 0;
+                var canParse = readLine != null && int.TryParse(readLine.Trim(), out numberInputs);
                 if (!canParse)
                 {
                     Console.WriteLine("The second line was not in the expected format");

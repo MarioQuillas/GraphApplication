@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CurrencyGraph.Domain
 {
@@ -8,6 +9,8 @@ namespace CurrencyGraph.Domain
 
         public Currency(string shortName)
         {
+            if (shortName == null || shortName.Length > 3) throw new ArgumentException("The curreny code can only be 3 character long");
+
             this.shortName = shortName;
         }
 
@@ -17,30 +20,45 @@ namespace CurrencyGraph.Domain
             return new Currency(str);
         }
 
+        public override string ToString()
+        {
+            return this.shortName;
+        }
+
+        #region equals
+
         public bool Equals(Currency other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return string.Equals(shortName, other.shortName);
+            // not use of == on 'other' since that operator will be overloaded afterwards and it can cause a infinite loop and then a stackoverflow exception.
+            return !object.ReferenceEquals(other, null) && string.Equals(shortName, other.shortName);
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Currency) obj);
+            return this.Equals(obj as Currency);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance. We implented it since the properties of this class are immutable.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table or dictionaries. 
+        /// </returns>
         public override int GetHashCode()
         {
             return (shortName != null ? shortName.GetHashCode() : 0);
         }
 
-        //TODO : for debugguing purpose
-        public override string ToString()
+        public static bool operator ==(Currency instance1, Currency instance2)
         {
-            return this.shortName;
+            return EqualityComparer<Currency>.Default.Equals(instance1, instance2);
         }
+
+        public static bool operator !=(Currency instance1, Currency instance2)
+        {
+            return !(instance1 == instance2);
+        }
+
+        #endregion
     }
 }
