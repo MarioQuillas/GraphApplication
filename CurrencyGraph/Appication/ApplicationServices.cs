@@ -17,7 +17,7 @@ namespace CurrencyGraph.Appication
 
         public decimal Calculate(string question, IEnumerable<string> data)
         {
-            var splitQuestion = question.Split(';');
+            var splitQuestion = question.Trim().Split(';');
 
             if (splitQuestion.Length != 3)
                 throw new ArgumentException("The first line containing the question was not correctly formated");
@@ -33,7 +33,7 @@ namespace CurrencyGraph.Appication
             var changeRateDtoList = new List<ChangeRateDto>();
             foreach (var changeRate in data)
             {
-                var splitInputChangeRate = changeRate.Split(';');
+                var splitInputChangeRate = changeRate.Trim().Split(';');
                 if (splitInputChangeRate.Length != 3)
                     throw new ArgumentException("The input of change rates has a format issue");
                 if (!decimal.TryParse(splitInputChangeRate[2], NumberStyles.AllowDecimalPoint,
