@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GraphApi.Tests
+namespace CurrencyGraph.Tests.Domain.CurrencyGraphTests
 {
     [TestClass]
-    public class UnitTest1
+    public class GetShortestPathtTests
     {
         //[TestMethod]
         //public void TestMethod1()

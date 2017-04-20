@@ -20,8 +20,10 @@ namespace GraphApi
             this.path = new Stack<PathStep<TVertex, TEdge>>();
         }
 
+        // TODO : a special case pattern could be implemented to handle when there is no conversion path
         public IEnumerable<PathStep<TVertex, TEdge>> GetPathTraveller()
         {
+            if (this.path.Count == 0) throw new InvalidOperationException("There is no conversion path");
             if (this.EndingVertex.Equals(this.currentEndingVertex)) throw new InvalidOperationException("The path is not from the starting point to the ending point");
 
             return this.path;

@@ -17,33 +17,20 @@ namespace GraphApi
 
         public TVertex GetOtherVertex(TVertex currentVertex)
         {
-            //TODO : implement equals correctly
             return currentVertex.Equals(this.edge1.Source) ? this.edge1.Target : this.edge1.Source;
         }
 
         public bool ContainVertex(TVertex vertex)
         {
-            //TODO : implement equals correctly
-            var toto1 = this.edge1.Source.Equals(vertex);
-
-            var toto2 = this.edge1.Target.Equals(vertex);
-
-            return toto1 || toto2;
+            return this.edge1.Source.Equals(vertex) || this.edge1.Target.Equals(vertex);
         }
 
         public decimal GetWeightFromStartingVertex(TVertex startingVertex)
         {
-            //TODO : implement equals correctly
             if (this.edge1.Source.Equals(startingVertex)) return this.edge1.Weight;
             if (this.edge2.Source.Equals(startingVertex)) return this.edge2.Weight;
 
             throw new InvalidOperationException("An Invariant was broken in the WeithedBidirectionalEdge");
-        }
-
-        //TODO : for debugging purpose
-        public override string ToString()
-        {
-            return this.edge1.Source+ "," + this.edge1.Target;
         }
     }
 }

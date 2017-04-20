@@ -14,11 +14,5 @@ namespace GraphApi
             EndingVertex = endingVertex;
             TravelledEdge = travelledEdge;
         }
-
-        //TODO : for debugging purpose
-        public override string ToString()
-        {
-            return this.StartingVertex + ", " + this.EndingVertex;
-        }
     }
 }

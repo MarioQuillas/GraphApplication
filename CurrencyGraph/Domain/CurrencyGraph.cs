@@ -62,8 +62,8 @@ namespace CurrencyGraph.Domain
         internal IEnumerable<PathStep<Currency, WeightedBidrectionalEdge<Currency>>> GetShortestPath(Currency source, Currency target)
         {
             var scannedGraphResult = this.scannerGraphAlgorithm.TraverseGraph(this, source);
-            var shortestPath = new ShortestPathFinder<Currency, WeightedBidrectionalEdge<Currency>>(scannedGraphResult);
-            var result = shortestPath.Path(target);
+            var shortestPathFinder = new ShortestPathFinder<Currency, WeightedBidrectionalEdge<Currency>>(scannedGraphResult);
+            var result = shortestPathFinder.Path(target);
             return result.GetPathTraveller();
         }
     }
