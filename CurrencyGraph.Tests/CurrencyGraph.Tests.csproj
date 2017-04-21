@@ -52,10 +52,14 @@
     <Compile Include="Domain\CurrencyGraphTests\GetShortestPathtTests.cs" />
     <Compile Include="Domain\DomainServicesTests\GetConversionPathTests.cs" />
     <Compile Include="Domain\DomainServicesTests\CalculateTests.cs" />
+    <Compile Include="IntegrationTests\IntegrationTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\testFile.in" />
+    <None Include="Resources\testFile_4.in" />
+    <None Include="Resources\testFile_3.in" />
+    <None Include="Resources\testFile_2.in" />
+    <None Include="Resources\testFile_1.in" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -13,8 +13,8 @@ namespace CurrencyGraph
         {
             if (args.Length == 0 || args.Length > 1)
             {
-                Console.WriteLine("The input parameters are not correct");
-                Console.ReadLine();
+                Console.Write("The input parameters are not correct");
+                //Console.ReadLine();
                 return;
             }
 
@@ -22,8 +22,8 @@ namespace CurrencyGraph
 
             if (!File.Exists(inputPath))
             {
-                Console.WriteLine("The file does not exist");
-                Console.ReadLine();
+                Console.Write("The file does not exist");
+                //Console.ReadLine();
                 return;
             }
 
@@ -37,8 +37,8 @@ namespace CurrencyGraph
                 var canParse = readLine != null && int.TryParse(readLine.Trim(), out numberInputs);
                 if (!canParse)
                 {
-                    Console.WriteLine("The second line was not in the expected format");
-                    Console.ReadLine();
+                    Console.Write("The second line was not in the expected format");
+                    //Console.ReadLine();
                     return;
                 }
 
@@ -50,8 +50,8 @@ namespace CurrencyGraph
 
             var result = new ApplicationServices(new DomainServices()).Calculate(question, inputData);
 
-            Console.WriteLine(result);
-            Console.ReadLine();
+            Console.Write(result);
+            //Console.ReadLine();
         }
     }
 }
