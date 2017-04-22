@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -59,12 +60,27 @@ namespace CurrencyGraph.Tests.IntegrationTests
             }
         }
 
+        // TODO : to return a better message when the assert fails
         [TestMethod]
         public void should_return_correct_value_in_test_files()
         {
-            var Files = "";
+            var registeredTests = this.RegisterTests();
 
-            this.ExecuteSafeAssert("testFile_1.in", obtainedResult => Assert.IsTrue(obtainedResult == 59033));
+            foreach (var test in registeredTests)
+            {
+                this.ExecuteSafeAssert(test.Key, obtainedResult => Assert.IsTrue(obtainedResult == test.Value));
+            }
+        }
+
+        private Dictionary<string, decimal> RegisterTests()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                {"testFile_1.in", 59033},
+                {"testFile_2.in", 5},
+                {"testFile_3.in", 550},
+                {"testFile_4.in", 714},
+            };
         }
     }
 }
