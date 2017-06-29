@@ -64,7 +64,7 @@ namespace CurrencyGraph.Tests.IntegrationTests
         [TestMethod]
         public void should_return_correct_value_in_test_files()
         {
-            var registeredTests = this.RegisterTests();
+            var registeredTests = this.RegisterNoErrorTests();
 
             foreach (var test in registeredTests)
             {
@@ -72,7 +72,19 @@ namespace CurrencyGraph.Tests.IntegrationTests
             }
         }
 
-        private Dictionary<string, decimal> RegisterTests()
+        // TODO : to return a better message when the assert fails
+        [TestMethod]
+        public void should_return_correct_error_value_in_test_files_with_error()
+        {
+            var registeredTests = this.RegisterErrorTests();
+
+            foreach (var test in registeredTests)
+            {
+                this.ExecuteSafeAssert(test.Key, obtainedResult => Assert.IsTrue(obtainedResult == test.Value));
+            }
+        }
+
+        private Dictionary<string, decimal> RegisterNoErrorTests()
         {
             return new Dictionary<string, decimal>()
             {
@@ -82,5 +94,14 @@ namespace CurrencyGraph.Tests.IntegrationTests
                 {"testFile_4.in", 714},
             };
         }
+
+        private Dictionary<string, decimal> RegisterErrorTests()
+        {
+            return new Dictionary<string, decimal>()
+            {
+                {"testFile_5.in", 123},
+            };
+        }
+
     }
 }

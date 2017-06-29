@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\testFile_5.in" />
     <None Include="Resources\testFile_4.in" />
     <None Include="Resources\testFile_3.in" />
     <None Include="Resources\testFile_2.in" />
