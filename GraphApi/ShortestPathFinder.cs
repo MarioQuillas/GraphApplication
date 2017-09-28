@@ -1,11 +1,11 @@
-﻿using System;
-using GraphApi.Interfaces;
-
-namespace GraphApi
+﻿namespace GraphApi
 {
+    using System;
+
+    using GraphApi.Interfaces;
+
     public class ShortestPathFinder<TVertex, TEdge>
-        where TEdge : IUndirectedEdge<TVertex>
-        where TVertex : IEquatable<TVertex>
+        where TEdge : IUndirectedEdge<TVertex> where TVertex : IEquatable<TVertex>
     {
         private readonly IScannedGraphResult<TVertex, TEdge> scannedGraphResult;
 
@@ -24,8 +24,7 @@ namespace GraphApi
 
             if (!this.IsConnected(targetVertex)) return path;
 
-            //var path = new Stack<VertexEdge<TVertex, TEdge>>();
-
+            // var path = new Stack<VertexEdge<TVertex, TEdge>>();
             var currentVertexInPath = targetVertex;
 
             while (!currentVertexInPath.Equals(startingVertex))
@@ -33,10 +32,11 @@ namespace GraphApi
                 var edge = this.scannedGraphResult.VertexToParentEdge[currentVertexInPath];
                 path.AddNextContinuousEdgeFromCurrentEndingVertex(edge);
                 currentVertexInPath = edge.GetOtherVertex(currentVertexInPath);
-                //currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
-            }
-            //path.Push(this.scannedGraphResult.SourceVertex);
 
+                // currentVertexInPath = this.scannedGraphResult.VertexToParentVertex[currentVertexInPath];
+            }
+
+            // path.Push(this.scannedGraphResult.SourceVertex);
             return path;
         }
     }

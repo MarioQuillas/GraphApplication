@@ -1,12 +1,14 @@
-﻿using System;
-using GraphApi.Interfaces;
-
-namespace GraphApi
+﻿namespace GraphApi
 {
+    using System;
+
+    using GraphApi.Interfaces;
+
     public class WeightedBidrectionalEdge<TVertex> : IUndirectedEdge<TVertex>
-        where TVertex:IEquatable<TVertex>
+        where TVertex : IEquatable<TVertex>
     {
         private readonly WeightedDirectionalEdge<TVertex> edge1;
+
         private readonly WeightedDirectionalEdge<TVertex> edge2;
 
         public WeightedBidrectionalEdge(TVertex vertex1, TVertex vertex2, decimal weight12, decimal weight21)
@@ -15,14 +17,14 @@ namespace GraphApi
             this.edge2 = new WeightedDirectionalEdge<TVertex>(vertex2, vertex1, weight21);
         }
 
-        public TVertex GetOtherVertex(TVertex currentVertex)
-        {
-            return currentVertex.Equals(this.edge1.Source) ? this.edge1.Target : this.edge1.Source;
-        }
-
         public bool ContainVertex(TVertex vertex)
         {
             return this.edge1.Source.Equals(vertex) || this.edge1.Target.Equals(vertex);
+        }
+
+        public TVertex GetOtherVertex(TVertex currentVertex)
+        {
+            return currentVertex.Equals(this.edge1.Source) ? this.edge1.Target : this.edge1.Source;
         }
 
         public decimal GetWeightFromStartingVertex(TVertex startingVertex)

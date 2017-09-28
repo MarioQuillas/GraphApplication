@@ -2,10 +2,6 @@
 {
     internal class WeightedDirectionalEdge<TVertex>
     {
-        public TVertex Source { get; }
-        public TVertex Target { get; }
-        public decimal Weight { get; }
-
         public WeightedDirectionalEdge(TVertex source, TVertex target, decimal weight)
         {
             this.Source = source;
@@ -13,5 +9,10 @@
             this.Weight = weight;
         }
 
+        public TVertex Source { get; }
+
+        public TVertex Target { get; }
+
+        public decimal Weight { get; }
     }
 }

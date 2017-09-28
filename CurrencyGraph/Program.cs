@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq.Expressions;
-using CurrencyGraph.Appication;
-using CurrencyGraph.Domain;
-
-namespace CurrencyGraph
+﻿namespace CurrencyGraph
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+
+    using CurrencyGraph.Appication;
+    using CurrencyGraph.Domain;
+
     class Program
     {
         internal static void Main(string[] args)
@@ -14,20 +14,22 @@ namespace CurrencyGraph
             if (args.Length == 0 || args.Length > 1)
             {
                 Console.Write("The input parameters are not correct");
-                //Console.ReadLine();
+
+                // Console.ReadLine();
                 return;
             }
 
-            var inputPath = args[0]; //@"C:\MyGitHub\GraphApplication\CurrencyGraph.Tests\testFile.in";
+            var inputPath = args[0]; // @"C:\MyGitHub\GraphApplication\CurrencyGraph.Tests\testFile.in";
 
             if (!File.Exists(inputPath))
             {
                 Console.Write("The file does not exist");
-                //Console.ReadLine();
+
+                // Console.ReadLine();
                 return;
             }
 
-            var question = "";
+            var question = string.Empty;
             var inputData = new List<string>();
             using (var reader = File.OpenText(inputPath))
             {
@@ -38,7 +40,8 @@ namespace CurrencyGraph
                 if (!canParse)
                 {
                     Console.Write("The second line was not in the expected format");
-                    //Console.ReadLine();
+
+                    // Console.ReadLine();
                     return;
                 }
 
@@ -51,7 +54,8 @@ namespace CurrencyGraph
             var result = new ApplicationServices(new DomainServices()).Calculate(question, inputData);
 
             Console.Write(result);
-            //Console.ReadLine();
+
+            // Console.ReadLine();
         }
     }
 }

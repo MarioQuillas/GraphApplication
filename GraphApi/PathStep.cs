@@ -1,18 +1,21 @@
-﻿using GraphApi.Interfaces;
-
-namespace GraphApi
+﻿namespace GraphApi
 {
-    public class PathStep<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
-    {
-        public TVertex StartingVertex { get; }
-        public TVertex EndingVertex { get; }
-        public TEdge TravelledEdge { get; }
+    using GraphApi.Interfaces;
 
+    public class PathStep<TVertex, TEdge>
+        where TEdge : IUndirectedEdge<TVertex>
+    {
         public PathStep(TVertex startingVertex, TVertex endingVertex, TEdge travelledEdge)
         {
-            StartingVertex = startingVertex;
-            EndingVertex = endingVertex;
-            TravelledEdge = travelledEdge;
+            this.StartingVertex = startingVertex;
+            this.EndingVertex = endingVertex;
+            this.TravelledEdge = travelledEdge;
         }
+
+        public TVertex EndingVertex { get; }
+
+        public TVertex StartingVertex { get; }
+
+        public TEdge TravelledEdge { get; }
     }
 }

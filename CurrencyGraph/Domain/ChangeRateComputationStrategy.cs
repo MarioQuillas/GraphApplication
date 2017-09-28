@@ -1,20 +1,19 @@
-﻿using System;
-using CurrencyGraph.Domain.Interfaces;
-
-namespace CurrencyGraph.Domain
+﻿namespace CurrencyGraph.Domain
 {
+    using global::CurrencyGraph.Domain.Interfaces;
+
     internal class ChangeRateComputationStrategy : IChangeRateComputationStrategy
     {
-        public int RoundNumberDecimals { get; }
-
         public ChangeRateComputationStrategy(int roundNumberDecimals)
         {
-            RoundNumberDecimals = roundNumberDecimals;
+            this.RoundNumberDecimals = roundNumberDecimals;
         }
+
+        public int RoundNumberDecimals { get; }
 
         public decimal ComputeInverseRate(decimal changeRateRate)
         {
-            return decimal.Round( 1 / changeRateRate, this.RoundNumberDecimals);
+            return decimal.Round(1 / changeRateRate, this.RoundNumberDecimals);
         }
     }
 }

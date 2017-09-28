@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using CurrencyGraph.Appication.Interfaces;
-using CurrencyGraph.Presentation;
-
-namespace CurrencyGraph.Appication
+﻿namespace CurrencyGraph.Appication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+
+    using CurrencyGraph.Appication.Interfaces;
+    using CurrencyGraph.Presentation;
+
     public class ApplicationServices : IApplicationServices
     {
         private readonly IDomainServices domainServices;
@@ -21,14 +22,17 @@ namespace CurrencyGraph.Appication
 
             if (splitQuestion.Length != 3)
                 throw new ArgumentException("The first line containing the question was not correctly formated");
-            
+
             var source = splitQuestion[0];
             var target = splitQuestion[2];
 
             decimal quantity;
 
-            if (!decimal.TryParse(splitQuestion[1], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture,
-                out quantity))
+            if (!decimal.TryParse(
+                    splitQuestion[1],
+                    NumberStyles.AllowDecimalPoint,
+                    CultureInfo.InvariantCulture,
+                    out quantity))
                 throw new ArgumentException(
                     "The first line contained a second parameter that does not represent a quantity");
 
@@ -42,8 +46,11 @@ namespace CurrencyGraph.Appication
 
                 decimal rate;
 
-                if (!decimal.TryParse(splitInputChangeRate[2], NumberStyles.AllowDecimalPoint,
-                    CultureInfo.InvariantCulture, out rate))
+                if (!decimal.TryParse(
+                        splitInputChangeRate[2],
+                        NumberStyles.AllowDecimalPoint,
+                        CultureInfo.InvariantCulture,
+                        out rate))
                     throw new ArgumentException("The change rate of one of the inputs was not in the correct format");
                 var changeRateDto = new ChangeRateDto(splitInputChangeRate[0], splitInputChangeRate[1], rate);
                 changeRateDtoList.Add(changeRateDto);

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GraphApi.Interfaces;
-
-namespace GraphApi
+﻿namespace GraphApi
 {
-    public class BfsScanner<TVertex, TEdge> : IScannerGraphAlgorithm<TVertex, TEdge> where TEdge : IUndirectedEdge<TVertex>
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using GraphApi.Interfaces;
+
+    public class BfsScanner<TVertex, TEdge> : IScannerGraphAlgorithm<TVertex, TEdge>
+        where TEdge : IUndirectedEdge<TVertex>
     {
         private readonly IScannerResultfactory<TVertex, TEdge> scannerResultfactory;
 
@@ -13,11 +15,13 @@ namespace GraphApi
             this.scannerResultfactory = scannerResultfactory;
         }
 
-        public IScannedGraphResult<TVertex, TEdge> TraverseGraph(IUndirectedGraph<TVertex, TEdge> undirectedGraph, TVertex sourceVertex)
+        public IScannedGraphResult<TVertex, TEdge> TraverseGraph(
+            IUndirectedGraph<TVertex, TEdge> undirectedGraph,
+            TVertex sourceVertex)
         {
             var markedVertices = new HashSet<TVertex>();
-            //var vertexToParentVertex = new Dictionary<TVertex, TVertex>();
 
+            // var vertexToParentVertex = new Dictionary<TVertex, TVertex>();
             var vertexToParentEdge = new Dictionary<TVertex, TEdge>();
 
             var queue = new Queue<TVertex>();
@@ -34,7 +38,7 @@ namespace GraphApi
 
                     if (!markedVertices.Add(vertex)) continue;
 
-                    //vertexToParentVertex[vertex] = currentVertex;
+                    // vertexToParentVertex[vertex] = currentVertex;
                     vertexToParentEdge[vertex] = edge;
 
                     queue.Enqueue(vertex);
